@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat&family=DM+Serif+Display:ital@1&family=Libre+Baskerville&display=swap" rel="stylesheet">
+    <style>
+        a{
+            border: 1px solid black;
+            padding: 5px;
+            border-radius:15px;
+            background-color: #ffe5ec;
+            color:#051923;  
+            text-decoration: none;
+        }
+        
+        #add{
+            margin-top: 10px;
+        }
+        #list{
+            margin-top:50px;
+        }
+        .list{
+            color:#fff;
+            border:1px solid #051923;
+            border-radius: 50px;
+            padding:10px;
+            backdrop-filter: blur(20px);
+        }
+        #time,#list{
+            font-family: 'DM Serif Display', serif;
+        }
+        #time{
+            font-size: large;
+            color:#fff
+        }
+        #list{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .back{
+            position: absolute;
+            z-index: -1;
+            right: 0;
+            bottom: 0;
+        }
+        @media(min-aspect-ratio:16/9){
+            .back{
+                width:100%;
+                height: auto;
+            }
+        }
+        @media(max-aspect-ratio:16/9){
+            .back{
+                width:auto;
+                height: 100%;
+            }
+        }      
+        /* Adding image in background which fit perfectly
+       body{
+            background-image:url('{% static "images/background.jpg"%}');
+            background-size:cover;
+            background-repeat:no-repeat; 
+            background-attachment: fixed;
+        }  */
+    </style>
+</head>
+<body>
+    
+    <video autoplay muted loop plays-inline class="back">
+        <source src="../../static/images/mylivewallpapers-com-Your-Name.mp4" type="video/mp4">
+    </video>
+   <div>
+    <center>
+    <form>
+    <div id="time">
+        {{time}}
+    </div>    
+    <div id="list">
+    {% for task in tasks %}
+        <input type="radio" name="q" value="{{task}}"><div class="list" style="display: inline-block;">{{ task }}</div></input>
+        <br>
+    {% empty %}
+        <li>NO LIST!</li>
+    {% endfor %}
+    </div>
+    <div id="add">
+    <a href="{% url 'tasks:add' %}">Add a new task!</a>   
+    </div>
+    </div>
+    </form>
+    </center>
+</body>
+</html>
